@@ -2027,11 +2027,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     logout: function logout() {
-      var _this2 = this;
-
-      axios.post('/logout').then(function (response) {
-        _this2.$store.dispatch('logout');
-      });
+      this.$store.dispatch('logout');
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['isAuthenticated']))

@@ -49,9 +49,7 @@
             },
 
             logout() {
-                axios.post('/logout').then(response => {
-                    this.$store.dispatch('logout');
-                })
+                this.$store.dispatch('logout');
             },
         },
 
