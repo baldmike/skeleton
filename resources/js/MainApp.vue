@@ -1,8 +1,6 @@
 <template>    
-    <div class="container-fluid">
-        
-        
-        <example-component v-if="!isAuthenticated" :is="ExampleComponent"></example-component>
+    <div class="container-fluid">        
+        <example-component v-if="!isAuthenticated" :is="LoginComponent"></example-component>
         <router-view v-if="isAuthenticated"></router-view>
     </div>
 </template>
@@ -17,7 +15,7 @@
         components: {
             
         },
-        props: ["ExampleComponent"],
+        props: ["LoginComponent"],
         computed: mapGetters(['isAuthenticated']),
         
         mounted() {

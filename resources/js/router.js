@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
 import MainApp from './MainApp.vue'
-import ExampleComponent from './components/ExampleComponent.vue'
+import LoginComponent from './components/LoginComponent.vue'
 import DashboardComponent from './components/DashboardComponent.vue'
 
 export const router = new VueRouter({ 
@@ -10,7 +10,7 @@ export const router = new VueRouter({
         {
             path: '/', 
             component: MainApp,
-            props: {ExampleComponent: ExampleComponent},
+            props: {LoginComponent: LoginComponent},
             children: [
                 {
                     path: 'dashboard',
