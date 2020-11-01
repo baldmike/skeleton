@@ -40,12 +40,7 @@
         },
         methods: {
             handleLogin() {
-                axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.post('/login', this.formData).then(response => {
-                        this.$store.dispatch('login');
-                        console.log(response);
-                    });
-                });
+                this.$store.dispatch('login', this.formData);
             },
 
             logout() {
