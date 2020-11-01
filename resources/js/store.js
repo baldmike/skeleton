@@ -26,8 +26,18 @@ export default new Vuex.Store({
     mutations: {
         // mutations are committed by actions, and are the ONLY way to manipulate state
 
-        login(state) {
+        login(state, payload) {
             
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post('/login', payload).then(response => {
+                    
+                    console.log(response);
+                });
+            });
+
+
+
+
             state.token = document.cookie;
             localStorage.setItem('user-token', state.token);
 
@@ -46,8 +56,8 @@ export default new Vuex.Store({
     actions: {
         // actions are dispatched, they commit mutations
 
-        login({commit}) {
-            commit ('login');
+        login(context, payload) {
+            context.commit('login', payload);
         },
 
         logout({commit}) {
