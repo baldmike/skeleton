@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <nav-bar></nav-bar>
         <router-view></router-view>
+        <notifications group="notifications" position="bottom center" width="100%"/>
     </div>
 </template>
 
@@ -15,7 +16,7 @@
         components: {
             NavBar
         },
-        props: ["LoginComponent"],
+        
         computed: mapGetters(['isAuthenticated']),
         
         mounted() {
@@ -27,3 +28,12 @@
 
 </script>
 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        max-width: 100vw;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
