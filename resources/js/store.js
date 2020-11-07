@@ -30,20 +30,24 @@ export default new Vuex.Store({
             
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/login', payload).then(response => {
+                    state.token = document.cookie;
+                    localStorage.setItem('user-token', state.token);
                     
-                    console.log(response);
                 });
+            }).catch(function (error) {
+
+                self.$notify({
+                    group: 'notifications',
+                    type: 'error',
+                    title: error,
+                    text: 'INVALID CREDENTIALS - PLEASE TRY AGAIN.',
+                    duration: '15000',
+                    width: '100%'
+                });
+
             });
-
-
-
-
-            state.token = document.cookie;
-            localStorage.setItem('user-token', state.token);
-
-            router.push('dashboard')
-            console.log(state.token);
         },
+
         logout(state) {
             
             state.token = null;
