@@ -13,18 +13,17 @@ export default new Vuex.Store({
         console.log("THIS IS THE TOKEN: " + token);
 
         return {
-            token: token ? token : null,
+            
+            isAuthenticated: false,
         }
     },
     getters: { 
-        // getters get data from state and are available in components
 
         // !! returns boolean  --  if there is a token, the user is authenticated
-        isAuthenticated: state => !!state.token,
+        isAuthenticated: state => state.isAuthenticated,
 
     },
     mutations: {
-        // mutations are committed by actions, and are the ONLY way to manipulate state
 
         login(state, payload) {
             
@@ -32,33 +31,51 @@ export default new Vuex.Store({
                 axios.post('/login', payload).then(response => {
                     state.token = document.cookie;
                     localStorage.setItem('user-token', state.token);
+
+                    state.isAuthenticated = true;
+
+                    router.push('/dashboard');
+
+                    Vue.notify({
+                        group: 'notifications',
+                        type: 'success',
+                        title: 'Success!',
+                        text: 'You are now logged in',
+                        duration: '15000',
+                        width: '100%'
+                    });
+
                     
-                });
-            }).catch(function (error) {
+                    
+                }).catch(function (error) {
 
-                self.$notify({
-                    group: 'notifications',
-                    type: 'error',
-                    title: error,
-                    text: 'INVALID CREDENTIALS - PLEASE TRY AGAIN.',
-                    duration: '15000',
-                    width: '100%'
+                    Vue.notify({
+                        group: 'notifications',
+                        type: 'error',
+                        title: error,
+                        text: 'INVALID CREDENTIALS - PLEASE TRY AGAIN.',
+                        duration: '20000',
+                        width: '100%'
+                    });
+    
                 });
-
             });
         },
 
         logout(state) {
             
-            state.token = null;
-            localStorage.removeItem('user-token');
             axios.post('/logout').then(Response =>{
+                document.cookie = "laravel_session=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                document.cookie = "XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                state.isAuthenticated = false;
+                state.token = null;
+                localStorage.removeItem('user-token');
+                
                 router.push('/');
             })
         },
     },
     actions: {
-        // actions are dispatched, they commit mutations
 
         login(context, payload) {
             context.commit('login', payload);
