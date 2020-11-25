@@ -1,7 +1,6 @@
 <template>
     <div>
         <h1>The Dashboard Component</h1>
-        <button @click.prevent="logout">LOGOUT</button>
     </div>
 </template>
  
