@@ -22,7 +22,7 @@ export const router = new VueRouter({
                     path: 'dashboard',
                     component: DashboardComponent,
                     beforeEnter: (to, from, next) => {
-                        if (!store.isAuthenticated) {
+                        if (!store.state.isAuthenticated) {
                             next({
                                 path: 'login'
                             });

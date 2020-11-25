@@ -20,9 +20,7 @@
         computed: mapGetters(['isAuthenticated']),
         
         mounted() {
-            if (this.isAuthenticated) {
-                this.$router.push('dashboard');
-            }
+            
         }
     }
 
