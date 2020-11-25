@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <!-- login form -->
-        <div class="row mt-4" v-if="!secrets.length">
+        <div class="row mt-4">
             <div class="col-6 offset-3">
                 <form action="#" @submit.prevent="handleLogin">
                     <h3>Login</h3>
@@ -12,14 +12,10 @@
                         <input type="password" name="password" class="form-control" v-model="formData.password" placeholder="Password">
                     </div>
                     <div class="form-row">
-                        <button type="submit" class="btn btn-primary">Sign In</button>
+                        <button type="submit" class="btn btn-primary">Log In</button>
                     </div>
                 </form>
             </div>
-        </div>
-
-        <div class="row mt-4">
-            <button v-if="isAuthenticated" @click="logout">LOGOUT</button>
         </div>
     </div>
 </template>
@@ -31,7 +27,7 @@
     export default {
         data() {
             return {
-                secrets: [],
+                
                 formData: {
                     email: '',
                     password: ''
