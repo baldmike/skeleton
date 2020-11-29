@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::view('/{any}', 'spa')->where('any', '.*');
+Route::get('/{any}', 'spa')->where('any', '.*');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
